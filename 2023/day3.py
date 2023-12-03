@@ -5,14 +5,8 @@ def read_txt(filename):
     return [line.rstrip('\n') for line in open(filename, 'r')]
 
 def parse(l):
-    d, s = [], []
-    for k in range(len(l)):
-        for n in re.finditer("\d+|[^.]", l[k]):
-            c = n.group()
-            if c.isdecimal():
-                d.append([int(c), [(i, j) for i in [k-1, k, k+1] for j in range(n.start()-1, n.end()+1)]])
-            else:
-                s.append([c, (k, n.start())])
+    d = [[int(n.group()), [(i, j) for i in [k-1, k, k+1] for j in range(n.start()-1, n.end()+1)]] for k in range(len(l)) for n in re.finditer("\d+", l[k])]
+    s = [[n.group(), (k, n.start())] for k in range(len(l)) for n in re.finditer("[^\d.]", l[k])]
     return d, s
 
 def part1(l):
