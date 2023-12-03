@@ -1,23 +1,19 @@
 import math
+import re
 
 def read_txt(filename):
     return [line.rstrip('\n') for line in open(filename, 'r')]
 
 def parse(l):
-    digits, symbols = [], []
-    digit = ["", set()]
-    for i in range(len(l)):
-        for j in range(len(l[i])):
-            c = l[i][j]
-            if c.isdigit():
-                digit[0] += c
-                digit[1].update([(i+k, j+l) for k in range(-1, 2) for l in range(-1, 2)])
-            elif c != ".":
-                symbols.append((c, (i, j)))
-            if (not c.isdigit() or j == len(l[i])) and digit[0]:
-                digits.append((int(digit[0]), digit[1]))
-                digit = ["", set()]
-    return digits, symbols
+    d, s = [], []
+    for k in range(len(l)):
+        for n in re.finditer("\d+|[^.]", l[k]):
+            c = n.group()
+            if c.isdecimal():
+                d.append([int(c), [(i, j) for i in [k-1, k, k+1] for j in range(n.start()-1, n.end()+1)]])
+            else:
+                s.append([c, (k, n.start())])
+    return d, s
 
 def part1(l):
     d, s = parse(l)
