@@ -1,6 +1,7 @@
 import math
 import re
 
+
 def read_txt(filename):
     return [line.rstrip('\n') for line in open(filename, 'r')]
 
