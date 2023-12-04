@@ -15,9 +15,8 @@ def part1(l):
     return sum(math.floor(2**(n(a, b)-1)) for a, b in parse(l))
 
 def part2(l):
-    l = parse(l)
-    nn = [n(a, b) for a, b in l]
-    d = [1 for _ in range(len(l))]
+    nn = [n(a, b) for a, b in parse(l)]
+    d = [1 for _ in range(len(nn))]
     for k, l in enumerate(d):
         for _ in range(l):
             for i in range(nn[k]):
