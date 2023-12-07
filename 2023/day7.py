@@ -1,6 +1,3 @@
-def read_txt(filename):
-    return [line.rstrip('\n') for line in open(filename, 'r')]
-
 def res(l, p, d):
     def score(s, p, d):
         t = {(1, 1): 0, (2, 1): 1, (2, 2): 2, (3, 1): 3, (3, 2): 4, (4, 1): 5, (5, 0): 6}
@@ -23,9 +20,3 @@ def part2(l):
         return m1 + s[0].count("J"), m2
     d = dict(zip(["J", "2", "3", "4", "5", "6", "7", "8", "9", "T", "Q", "K", "A"], range(13)))
     return res(l, p, d)
-
-
-if __name__ == "__main__":
-    lines = read_txt("day7.txt")
-    print(part1(lines))
-    print(part2(lines))

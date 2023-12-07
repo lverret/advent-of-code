@@ -2,9 +2,6 @@ import sys
 import re
 
 
-def read_txt(filename):
-    return [line.rstrip('\n') for line in open(filename, 'r')]
-
 def parse(l):
     l = list(map(lambda x: [int(k) for k in x], map(lambda x: re.findall("\d+", x), "\n".join(l).split("map"))))
     return l[0], l[1:]
@@ -43,9 +40,3 @@ def part2(l):
     seeds, maps = parse(l)
     seeds = [[range(seeds[i], seeds[i] + seeds[i+1])] for i in range(0, len(seeds), 2)]
     return find_min(seeds, maps)
-
-
-if __name__ == "__main__":
-    lines = read_txt("day5.txt")
-    print(part1(lines))
-    print(part2(lines))
