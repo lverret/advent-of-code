@@ -10,6 +10,5 @@ def part1(l):
     return math.prod(sum(1 for k in range(t[i]) if k * (t[i] - k) > d[i]) for i in range(len(t)))
 
 def part2(l):
-    t, d = parse(l)
-    t, d = int("".join(map(str, t))), int("".join(map(str, d)))
+    t, d = map(lambda x: int("".join(map(str, x))), parse(l))
     return sum(1 for k in range(t) if k * (t - k) > d)
